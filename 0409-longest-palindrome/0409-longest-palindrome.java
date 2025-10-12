@@ -4,22 +4,24 @@ class Solution {
         HashMap<Character, Integer> map = new HashMap<>();
         
         int result = 0;
-        int oddFreq = 0;
-        
         for(char ch : s.toCharArray()) {
             map.put(ch, map.getOrDefault(ch, 0) + 1);
-            
-            if(map.get(ch) % 2 != 0) {
-                oddFreq++;
+        }
+        
+        boolean takeCentralChar = false;
+        for(int count : map.values()) {
+            if(count % 2 == 0) {
+                result += count;
             } else {
-                oddFreq--;
+                result += count - 1;
+                takeCentralChar = true;
             }
         }
         
-        if(oddFreq > 0) {
-            return n - oddFreq + 1;
+        if(takeCentralChar) {
+            result++;
         }
         
-        return n;
+        return result;
     }
 }
