@@ -1,19 +1,22 @@
 class Solution {
     public int totalMoney(int n) {
-        int result = 0;
-        int mondayMoney = 1;
+        int terms = n / 7; // Weeks
 
-        while (n > 0) {
-            int money = mondayMoney;
-            for (int day = 1; day <= Math.min(n, 7); day++) {
-                result += money;
-                money++;
-            }
+        int first = 28;
+        int last = 28 + (terms - 1) * 7; // AP formula for n-th term
 
-            n -= 7;
-            mondayMoney++;
+        int result = terms * (first + last) / 2; // Sum of nth terms in an AP
+
+        // Final week remaining days = n % 7
+        int startMoney = 1 + terms;
+
+        for (int day = 1; day <= (n % 7); day++) {
+            result += startMoney;
+            startMoney++;
         }
 
         return result;
     }
 }
+
+
